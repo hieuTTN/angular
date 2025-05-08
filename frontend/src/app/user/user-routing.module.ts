@@ -6,6 +6,7 @@ import { RegisComponent } from './pages/regis/regis';
 import { ConfirmComponent } from './pages/confirm/confirm';
 import { forgotComponent } from './pages/forgot/forgot';
 import { DatLaiMatKhauComponent } from './pages/datlaimatkhau/datlaimatkhau';
+import { HomeComponent } from './pages/home/home';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'confirm', component: ConfirmComponent }, 
       { path: 'forgot', component: forgotComponent }, 
       { path: 'datlaimatkhau', component: DatLaiMatKhauComponent }, 
+      { path: '', component: HomeComponent }, 
       { path: '', redirectTo: '/404', pathMatch: 'full' }
     ]
   }

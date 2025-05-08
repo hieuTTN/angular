@@ -1,0 +1,133 @@
+<div class="containerss">
+  <div class="row">
+
+      <div class="danhmucleft" id="danhmucleft">
+        <span class="spdanhmucleft" *ngFor="let category of categories">
+          <a href="" class="danhmucnameleft">{{ category.name }}
+          <span class="slsanphamdanhmuc"></span>
+          </a>
+          <img [src]="category.image" class="anhdmleft">
+        </span>
+      </div>
+
+      <div class="mainright">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner carousel-inner-index">
+            <div 
+              *ngFor="let banner of banners; let i = index" 
+              class="carousel-item" 
+              [ngClass]="{'active': i === 0}">
+              <a [href]="banner.linkWeb">
+                <img [src]="banner.image" class="d-block w-100" alt="...">
+              </a>
+            </div>
+          </div>
+          <button class="carousel-control carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+          <button class="carousel-control carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+          <div class="sanphamgiamgia">
+              <h5 class="titlekm">KHUYẾN MÃI SỐC</h5>
+              <div class="row" id="spkhuyenmaiindex">
+                <div class="col-lg-20p col-md-4 col-sm-6 col-6" *ngFor="let product of productKhuyenMai">
+                  <div class="singlesp">
+                    <div class="topspindex">
+                      <a [href]="'detail?id=' + product.id"><img [src]="product.imageBanner" class="imgproindex"></a>
+                      <a [href]="'detail?id=' + product.id" class="tenspindex">{{ product.name }}</a>
+                    </div>
+                    <div class="divgiaspindex">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <span class="curprice">{{ formatMoney(product.price) }}</span>
+                          <span class="oldpricesp" *ngIf="product.oldPrice > 0">{{ formatMoney(product.oldPrice) }}</span>
+                        </div>
+                        <div class="col-sm-6">
+                          <button (click)="addToCart(product.id)" class="btngiohangsp"><i class="fa fa-shopping-cart"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="phantramgiam">-{{tinhGiamGia(product.price, product.oldPrice)}} %</span>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div *ngIf="banners[getBannerIndex(1)]" class="bannerhot1">
+            <a [href]="banners[getBannerIndex(1)].linkWeb">
+              <img [src]="banners[getBannerIndex(1)].image" class="imgbannerhot" alt="Banner 1">
+            </a>
+          </div>
+
+          <div class="listsanphamdanhmuc">
+            <div class="tieudespdanhmuc">
+              <a href="" class="tieudespdanhmucsp">Sản phẩm bán chạy</a>
+            </div>
+            <div class="row listspdanhmuc" id="listspbanchay">
+              <div class="col-lg-20p col-md-4 col-sm-6 col-6" *ngFor="let product of bestSellingProducts">
+                <div class="singlesp">
+                  <div class="topspindex">
+                    <a [href]="'detail?id=' + product.id"><img [src]="product.imageBanner" class="imgproindex"></a>
+                    <a [href]="'detail?id=' + product.id" class="tenspindex">{{ product.name }}</a>
+                  </div>
+                  <div class="divgiaspindex">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <span class="curprice">{{ formatMoney(product.price) }}</span>
+                        <span class="oldpricesp" *ngIf="product.oldPrice > 0">{{ formatMoney(product.oldPrice) }}</span>
+                      </div>
+                      <div class="col-sm-6">
+                        <button (click)="addToCart(product.id)" class="btngiohangsp"><i class="fa fa-shopping-cart"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="dabanslindex">Đã bán: {{ product.quantitySold }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="xemtatca">
+              <button id="btnsanphambanchay" class="xemtatcabtn" (click)="loadBestSellingProducts()">Xem thêm <i class="fa fa-chevron-down"></i></button>
+            </div>
+          </div>
+          <div class="bannerhot1"></div>
+          <div class="listsanphamdanhmuc">
+              <div class="tieudespdanhmuc">
+                  <a href="" class="tieudespdanhmucsp">Sản phẩm mới</a>
+              </div>
+              <div class="row listspdanhmuc" id="listspmoi">
+                <div class="col-lg-20p col-md-4 col-sm-6 col-6" *ngFor="let product of productMoi">
+                  <div class="singlesp">
+                    <div class="topspindex">
+                      <a [href]="'detail?id=' + product.id"><img [src]="product.imageBanner" class="imgproindex"></a>
+                      <a [href]="'detail?id=' + product.id" class="tenspindex">{{ product.name }}</a>
+                    </div>
+                    <div class="divgiaspindex">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <span class="curprice">{{ formatMoney(product.price) }}</span>
+                          <span class="oldpricesp" *ngIf="product.oldPrice > 0">{{ formatMoney(product.oldPrice) }}</span>
+                        </div>
+                        <div class="col-sm-6">
+                          <button (click)="addToCart(product.id)" class="btngiohangsp"><i class="fa fa-shopping-cart"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="dabanslindex">Đã bán: {{ product.quantitySold }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="xemtatca">
+                  <button id="btnsanphammoi" class="xemtatcabtn" (click)="loadSanPhamMoi()">Xem thêm <i
+                          class="fa fa-chevron-down"></i></button>
+              </div>
+          </div>
+          <div *ngIf="banners[getBannerIndex(2)]" class="bannerhot1">
+            <a [href]="banners[getBannerIndex(2)].linkWeb">
+              <img [src]="banners[getBannerIndex(2)].image" class="imgbannerhot" alt="Banner 1">
+            </a>
+          </div>
+          <div id="footer"></div>
+      </div>
+  </div>
+</div>

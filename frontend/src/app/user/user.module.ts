@@ -11,9 +11,10 @@ import { RegisComponent } from './pages/regis/regis';
 import { ConfirmComponent } from './pages/confirm/confirm';
 import { forgotComponent } from './pages/forgot/forgot';
 import { DatLaiMatKhauComponent } from './pages/datlaimatkhau/datlaimatkhau';
+import { HomeComponent } from './pages/home/home';
 
 @NgModule({
-  declarations: [LoginComponent,RegisComponent,ConfirmComponent,forgotComponent,DatLaiMatKhauComponent],
+  declarations: [LoginComponent,RegisComponent,ConfirmComponent,forgotComponent,DatLaiMatKhauComponent,HomeComponent],
   imports: [
     CommonModule,
     RouterModule, 
