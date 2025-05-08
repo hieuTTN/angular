@@ -46,7 +46,7 @@ export class LoginComponent{
         if (result.user.authorities.name === "ROLE_ADMIN") {
           this.router.navigate(['/admin/index']);
         } else if (result.user.authorities.name === "ROLE_USER") {
-          this.router.navigate(['/index']);
+          window.location.href = '/'
         } else if (result.user.authorities.name === "ROLE_EMPLOYEE") {
           this.router.navigate(['/employee/taikhoan']);
         }
@@ -61,7 +61,7 @@ export class LoginComponent{
               text: "Tài khoản chưa được kích hoạt, đi tới kích hoạt tài khoản!",
               icon: "warning"
             }).then(() => {
-              this.router.navigate(['/confirm'], { queryParams: { email: this.username } });
+              window.location.href = '/confirm?email='+this.username
             });
           } else {
             this.toastr.warning(result.defaultMessage);

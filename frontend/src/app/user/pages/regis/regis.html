@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="dangnhapform">
+        <div class="divimglogin">
+            <img src="/image/dangki.jpg" alt="" />
+        </div>
+        <div class="divctlogin">
+            <p class="labeldangnhap">Đăng Ký</p>
+            <form (ngSubmit)="regis()" autocomplete="off">
+                <label class="lbform">Họ tên</label>
+                <input required [(ngModel)]="fullname" name="fullname" class="inputlogin" />
+                <label class="lbform">Email</label>
+                <input required type="email" [(ngModel)]="email" name="email" class="inputlogin" />
+                <label class="lbform">Số điện thoại</label>
+                <input required [(ngModel)]="phone" name="phone" class="inputlogin" />
+                <label class="lbform">Địa chỉ</label>
+                <input required [(ngModel)]="address" name="address" class="inputlogin" />
+                <label class="lbform">Mật khẩu</label>
+                <input required type="password" [(ngModel)]="password" name="password" class="inputlogin" />
+                <label class="lbform">Nhập lại mật khẩu</label>
+                <input require type="password" [(ngModel)]="repassword" name="repassword" class="inputlogin" />
+                <button class="btndangnhap">ĐĂNG KÝ</button>
+                <button onclick="window.location.href='login'" type="button" class="btndangky">ĐĂNG NHẬP</button>
+            </form>
+          
+            
+        </div>
+    </div>
+</div>

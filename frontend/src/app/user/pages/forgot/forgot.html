@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="dangnhapform">
+        <div class="divimglogin">
+            <img src="/image/login.jpg" alt=""/>
+        </div>
+        <div class="divctlogin">
+            <div class="form-container">
+                <p class="labeldangnhap">Xác Nhận Đăng Ký Tài Khoản</p>
+                <form (ngSubmit)="forgot()" autocomplete="off" class="row">
+                    <div class="col-sm-8">
+                        <label class="lbform">Nhập email của bạn</label>
+                        <div class="otp-container">
+                            <input class="form-control" name="email" [(ngModel)]="email">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="lbform">&ThinSpace;</label><br>
+                        <button class="form-control btn btn-primary">Xác nhận</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>

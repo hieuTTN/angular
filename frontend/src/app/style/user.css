@@ -2195,3 +2195,27 @@ footer .fab:hover {
     outline: none;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
+
+
+.otp-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.otp-input {
+    width: 45px;
+    height: 45px;
+    border: 2px solid var(--input-border-color);
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.2em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.otp-input:focus {
+    outline: none;
+    border-color: var(--input-focus-color);
+    box-shadow: 0 0 5px rgba(102, 187, 106, 0.5);
+}

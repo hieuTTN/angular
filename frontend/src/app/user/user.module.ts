@@ -5,12 +5,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { UserRoutingModule } from './user-routing.module';
-import { LoginComponent } from './pages/login/login'
-// import { ProductAddComponent } from './pages/product/productadd';
 import { ToastrModule } from 'ngx-toastr';
+import { LoginComponent } from './pages/login/login'
+import { RegisComponent } from './pages/regis/regis';
+import { ConfirmComponent } from './pages/confirm/confirm';
+import { forgotComponent } from './pages/forgot/forgot';
+import { DatLaiMatKhauComponent } from './pages/datlaimatkhau/datlaimatkhau';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent,RegisComponent,ConfirmComponent,forgotComponent,DatLaiMatKhauComponent],
   imports: [
     CommonModule,
     RouterModule, 

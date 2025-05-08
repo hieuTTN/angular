@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="dangnhapform">
+        <div class="divimglogin">
+            <img src="/image/login.jpg" alt=""/>
+        </div>
+        <div class="divctlogin">
+            <div class="form-container">
+                <p class="labeldangnhap">Xác Nhận Đăng Ký Tài Khoản</p>
+                <form (ngSubmit)="datlaimatkhau()" autocomplete="off" class="row">
+                    <label class="lbform">Nhập mật khẩu</label>
+                    <input required name="password"  [(ngModel)]="password" type="password" class="inputlogin">
+                    <label class="lbform">Nhập lại mật khẩu</label>
+                    <input required name="repassword" [(ngModel)]="repassword" type="password" class="inputlogin">
+                    <button class="btndangnhap">XÁC NHẬN</button>
+                    <button type="button" onclick="window.location.href='login'" class="btndangky">ĐĂNG NHẬP</button>
+                </form>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
