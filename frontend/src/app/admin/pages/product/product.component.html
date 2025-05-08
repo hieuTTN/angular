@@ -1,0 +1,43 @@
+<div class="header-sp row">
+  <div class="col-md-3">
+    <a href="/admin/addproduct" class="btn btn-primary"><i class="fa fa-plus"></i> Thêm sản phẩm</a>
+  </div>
+  <div class="col-md-3">
+    <select class="form-control" [(ngModel)]="selectedCategoryId" (change)="loadProducts()">
+      <option value="-1">Tất cả danh mục</option>
+      <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+    </select>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Ảnh</th>
+      <th>Danh mục</th>
+      <th>Tên</th>
+      <th>Giá</th>
+      <th>Giá cũ</th>
+      <th>Còn</th>
+      <th>Đã bán</th>
+      <th>Hành động</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of products">
+      <td>{{ p.id }}</td>
+      <td><img [src]="p.imageBanner" style="width: 100px;" /></td>
+      <td>{{ p.category.name }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ formatMoney(p.price) }}</td>
+      <td>{{ formatMoney(p.oldPrice) }}</td>
+      <td>{{ p.quantity }}</td>
+      <td>{{ p.quantitySold }}</td>
+      <td>
+        <i class="fa fa-trash-alt iconaction"></i>
+        <a href="/admin/addproduct?id={{p.id}}"><i class="fa fa-edit iconaction"></i></a>
+      </td>
+    </tr>
+  </tbody>
+</table>

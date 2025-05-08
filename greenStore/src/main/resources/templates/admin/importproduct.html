@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/tables.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+    <link href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/importproduct.js"></script>
+    <script>
+        window.onload = function () {
+            loadAllProductSelect();
+            loadImportProduct();
+        }
+    </script>
+</head>
+
+<body class="sb-nav-fixed">
+    <nav id="top" class="sb-topnav navbar navbar-expand navbar-dark bg-dark"></nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav"></div>
+        <div id="layoutSidenav_content">
+            <main class="main">
+                <div class="col-sm-12 header-sp">
+                    <div class="row form-container">
+                        <div class="col-md-2 col-sm-4 col-4 form-group">
+                            <label class="lb-form">Từ ngày</label>
+                            <input id="start" type="date" class="form-control">
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-4 form-group">
+                            <label class="lb-form">Đến ngày</label>
+                            <input id="end" type="date" class="form-control">
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-12 form-group">
+                            <label class="lb-form">Chọn sản phẩm</label>
+                            <select id="listproduct" class="form-control">
+                                <option value="-1">Chọn sản phẩm</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-4 form-group">
+                            <label class="lb-form">&ThinSpace;</label>
+                            <button onclick="loadImportProduct()" class="btn btn-primary btn-custom">Lọc</button>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-4 form-group">
+                            <label class="lb-form">&ThinSpace;</label>
+                            <a href="addimportproduct" class="btn btn-success btn-custom">Thêm đơn nhập</a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="wrapper">
+                        <table id="example" class="table table-striped tablefix">
+                            <thead class="thead-tablefix">
+                                <tr>
+                                    <th>id đơn nhập</th>
+                                    <th>sản phẩm</th>
+                                    <th>Số lượng nhập</th>
+                                    <th>giá nhập</th>
+                                    <th>Ngày nhập</th>
+                                    <th>Thông tin</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listImport">
+                                <tr>
+                                    <td>#2342</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="sticky-col">
+                                        <i class="fa fa-trash-alt iconaction"></i>
+                                        <i class="fa fa-edit iconaction"></i><br>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+
+        </div>
+    </div>
+
+</body>
+<script>
+    $('#example').DataTable();
+    $( document ).ready(function() {
+        const today = new Date();
+        var yyyy = today.getFullYear();
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+        var dd = String(today.getDate()).padStart(2, '0');
+
+        var currentDate = `${yyyy}-${mm}-${dd}`;
+        document.getElementById('end').value = currentDate;
+
+
+        // Tính ngày 7 ngày trước
+        var sevenDaysAgo = new Date(today);
+        sevenDaysAgo.setDate(today.getDate() - 7);
+        var yyyy = sevenDaysAgo.getFullYear();
+        var mm = String(sevenDaysAgo.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+        var dd = String(sevenDaysAgo.getDate()).padStart(2, '0');
+
+        var currentDate = `${yyyy}-${mm}-${dd}`;
+        document.getElementById('start').value = currentDate;
+    });
+</script>
+<style>
+    /* Nền màu cho các trường và nút */
+    .form-container {
+        background: linear-gradient(to right, #f39c12, #e74c3c);
+        /* Gradient background */
+        padding: 20px;
+        /* Padding around the form */
+        border-radius: 12px;
+        /* Rounded corners */
+        margin-bottom: 20px;
+        /* Space below the form */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        /* Shadow effect */
+    }
+
+    /* Định dạng cho từng nhóm trường */
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        /* Space between form fields */
+    }
+
+    /* Định dạng cho nhãn trường */
+    .lb-form {
+        color: #fff;
+        /* White text color for labels */
+        margin-bottom: 5px;
+        /* Space below the label */
+        font-weight: bold;
+    }
+
+    /* Định dạng cho các trường nhập liệu */
+    .form-control {
+        border: 1px solid #ccc;
+        /* Light gray border */
+        border-radius: 6px;
+        /* Rounded corners */
+        padding: 10px;
+        /* Padding inside the input */
+        transition: border-color 0.3s, box-shadow 0.3s;
+        /* Smooth transition */
+    }
+
+    .form-control:focus {
+        border-color: #f39c12;
+        /* Orange border on focus */
+        box-shadow: 0 0 8px rgba(243, 156, 18, 0.5);
+        /* Glow effect */
+    }
+
+    /* Định dạng cho các nút */
+    .btn-custom {
+        border-radius: 6px;
+        /* Rounded corners */
+        padding: 12px;
+        /* Padding inside the button */
+        text-align: center;
+        /* Center text in button */
+        font-weight: bold;
+        /* Bold text in button */
+        color: #fff;
+        /* White text color */
+        transition: background-color 0.3s, transform 0.3s;
+        /* Smooth transition */
+    }
+
+    .btn-custom:hover {
+        transform: scale(1.05);
+        /* Slightly enlarge button on hover */
+    }
+
+    .btn-success {
+        background-color: #09f740;
+        /* Green background for "Thêm đơn nhập" */
+        border-color: #e5550d;
+    }
+
+    .btn-success:hover {
+        background-color: #0ff7fb;
+        /* Darker green on hover */
+    }
+
+    .btn-primary {
+        background-color: #eb2323;
+        /* Blue background for "Lọc" */
+        border-color: #af0aeb;
+    }
+
+    .btn-primary:hover {
+        background-color: #0069d9;
+        /* Darker blue on hover */
+    }
+    /* Nút Lọc */
+.btn-primary {
+    background: linear-gradient(45deg, #3399ff, #007bff); /* Gradient màu xanh dương sáng hơn */
+    border: 1px solid #3399ff; /* Viền xanh dương sáng hơn */
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #007bff, #0056b3); /* Gradient khi hover */
+    transform: scale(1.05); /* Phóng to nút khi hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng nhẹ khi hover */
+}
+
+/* Nút Thêm đơn nhập */
+.btn-success {
+    background: linear-gradient(45deg, #66bb6a, #28a745); /* Gradient màu xanh lá cây sáng hơn */
+    border: 1px solid #66bb6a; /* Viền xanh lá cây sáng hơn */
+}
+
+.btn-success:hover {
+    background: linear-gradient(45deg, #28a745, #1e7e34); /* Gradient khi hover */
+    transform: scale(1.05); /* Phóng to nút khi hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng nhẹ khi hover */
+}
+
+</style>
+
+</html>

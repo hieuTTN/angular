@@ -1,0 +1,177 @@
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    color: #212529;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table th, .table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #e9ecef;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Optional: Style for first column */
+.table th:first-child, .table td:first-child {
+    border-left: none;
+}
+
+/* Optional: Style for last column */
+.table th:last-child, .table td:last-child {
+    border-right: none;
+}
+
+/* Header styles for a more distinct look */
+.table thead th {
+    background-color: #343a40;
+    color: white;
+}
+
+.table thead th:hover {
+    background-color: #0056b3;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Footer styles (if any) */
+.table tfoot {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.table tfoot td {
+    border-top: 1px solid #dee2e6;
+}
+
+
+.header-sp {
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Màu nền gradient từ hồng cam sang vàng cam */
+    padding: 20px; /* Padding để tạo khoảng cách bên trong */
+    border-radius: 10px; /* Góc bo tròn cho khung */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng đổ nhẹ */
+    margin-bottom: 20px; /* Khoảng cách dưới phần tiêu đề */
+}
+
+/* Định dạng cho các phần tử trong hàng */
+.header-sp .col-md-3 {
+    margin-bottom: 15px; /* Khoảng cách dưới các phần tử */
+}
+
+/* Định dạng cho nút Thêm sản phẩm */
+.header-sp .btn-primary {
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4); /* Màu nền gradient cho nút */
+    border: none; /* Loại bỏ viền nút */
+    color: #fff; /* Màu chữ trắng */
+    padding: 10px 20px; /* Padding cho nút */
+    border-radius: 8px; /* Bo góc cho nút */
+    text-align: center; /* Căn giữa văn bản */
+    display: block; /* Hiển thị dưới dạng khối */
+    transition: background 0.3s, transform 0.3s; /* Hiệu ứng chuyển màu và phóng to khi hover */
+}
+
+
+.header-sp .btn-primary:hover {
+    background: linear-gradient(45deg, #fad0c4, #ff9a9e); /* Màu nền gradient đảo ngược khi hover */
+    transform: scale(1.05); /* Phóng to nhẹ khi hover */
+}
+
+/* Định dạng cho các select và button */
+.header-sp .form-control {
+    background: #ffffff; /* Màu nền trắng cho select */
+    border-radius: 8px; /* Bo góc cho select */
+    border: 1px solid #ddd; /* Viền nhẹ cho select */
+    padding: 10px; /* Padding bên trong select */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Hiệu ứng chuyển màu viền và bóng khi focus */
+}
+
+.header-sp .form-control:focus {
+    border-color: #ff7e5f; /* Màu viền khi focus vào select */
+    box-shadow: 0 0 8px rgba(255, 126, 95, 0.5); /* Hiệu ứng bóng nhẹ khi focus */
+}
+
+/* Định dạng cho label */
+.lb-form {
+    display: block; /* Đảm bảo label được hiển thị thành khối */
+    margin-bottom: 5px; /* Khoảng cách dưới label */
+    font-weight: bold; /* Chữ đậm cho label */
+    color: #333; /* Màu chữ tối cho label */
+}
+.btn-danger {
+    background-color: #343a40;
+    background: linear-gradient(45deg, #ff6f61, #ffcc00); /* Gradient màu sắc tươi sáng từ hồng đến vàng */
+    border: none; /* Loại bỏ viền nút */
+    color: #ea1313; /* Màu chữ trắng */
+    padding: 12px 20px; /* Padding cho nút */
+    border-radius: 8px; /* Bo góc cho nút */
+    text-align: center; /* Căn giữa văn bản */
+    text-decoration: none; /* Loại bỏ gạch chân cho liên kết */
+    display: inline-block; /* Hiển thị dưới dạng khối inline */
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s; /* Hiệu ứng chuyển màu, phóng to và bóng */
+
+}
+.btn-danger :hover {
+    background: linear-gradient(45deg, #ff3d40, #f8e71c); /* Gradient màu sắc khi hover từ đỏ đến vàng nhạt */
+    transform: scale(1.05); /* Phóng to nhẹ khi hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng nhẹ khi hover */
+}
+
+/* Định dạng cho nút khi đang ở chế độ disabled */
+.btn-danger:disabled {
+    background: #ddd; /* Màu nền xám nhạt */
+    color: #ee0e0e; /* Màu chữ xám nhạt */
+    cursor: not-allowed; /* Con trỏ chuột khi hover là không cho phép */
+    box-shadow: none; /* Loại bỏ bóng khi disabled */
+}
+.btn-custom {
+    background: linear-gradient(45deg, #ff6f61, #ffcc00); /* Gradient màu sắc tươi sáng từ hồng đến vàng */
+    border: none; /* Loại bỏ viền nút */
+    color: #ea1313; /* Màu chữ trắng */
+    padding: 12px 20px; /* Padding cho nút */
+    border-radius: 8px; /* Bo góc cho nút */
+    text-align: center; /* Căn giữa văn bản */
+    text-decoration: none; /* Loại bỏ gạch chân cho liên kết */
+    display: inline-block; /* Hiển thị dưới dạng khối inline */
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s; /* Hiệu ứng chuyển màu, phóng to và bóng */
+}
+
+/* Hiệu ứng hover cho nút */
+.btn-custom:hover {
+    background: linear-gradient(45deg, #ff3d40, #f8e71c); /* Gradient màu sắc khi hover từ đỏ đến vàng nhạt */
+    transform: scale(1.05); /* Phóng to nhẹ khi hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng nhẹ khi hover */
+}
+
+/* Định dạng cho nút khi đang ở chế độ disabled */
+.btn-custom:disabled {
+    background: #ddd; /* Màu nền xám nhạt */
+    color: #ee0e0e; /* Màu chữ xám nhạt */
+    cursor: not-allowed; /* Con trỏ chuột khi hover là không cho phép */
+    box-shadow: none; /* Loại bỏ bóng khi disabled */
+}
+
+

@@ -1,0 +1,127 @@
+<div class="container">
+  <div class="col-sm-12 header-sps">
+    <div class="title-add-admin">
+      <p>Thêm/ cập nhật sản phẩm</p>
+    </div>
+  </div>
+  <form [formGroup]="productForm" (ngSubmit)="onSave()">
+    <div class="row">
+      <!-- Cột bên trái -->
+      <div class="col-md-4 col-sm-12 col-12">
+        <!-- Tên sản phẩm -->
+        <label class="lb-form">Tên sản phẩm</label>
+        <input id="name" type="text" class="form-control" formControlName="name" />
+        <span *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="error-message">
+          Bạn chưa nhập tên sản phẩm
+        </span>
+
+        <!-- Giá -->
+        <label class="lb-form">Giá tiền</label>
+        <input id="price" type="text" class="form-control" formControlName="price" />
+        <span *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="error-message">
+          Giá phải lớn hơn 0
+        </span>
+
+        <!-- Giá cũ -->
+        <label class="lb-form">Giá cũ</label>
+        <input id="oldPrice" type="text" class="form-control" formControlName="oldPrice" />
+
+        <!-- Số lượng -->
+        <label class="lb-form">Số lượng</label>
+        <input id="quantity" type="text" class="form-control" formControlName="quantity" />
+        <span *ngIf="productForm.get('quantity')?.invalid && productForm.get('quantity')?.touched" class="error-message">
+          Số lượng phải lớn hơn 0
+        </span>
+
+        <!-- Hạn sử dụng -->
+        <label class="lb-form" for="expiry">Hạn sử dụng:</label>
+        <input id="quantity" type="text" class="form-control" placeholder="Trên 12 tháng" formControlName="expiry" />
+
+        <!-- Đơn vị tính -->
+        <label class="lb-form">Đơn vị tính</label>
+        <select id="unit" name="unit" class="form-control" formControlName="unit">
+          <option value="">Chọn đơn vị tính</option>
+          <option value="Chiếc">Chiếc</option>
+          <option value="mét vuông">mét vuông</option>
+          <option value="Thùng">Thùng</option>
+          <option value="Khác">Khác</option>
+        </select>
+        <span *ngIf="productForm.get('unit')?.invalid && productForm.get('unit')?.touched" class="error-message">
+          Bạn chưa chọn đơn vị tính
+        </span>
+
+        <!-- Danh mục sản phẩm -->
+        <label class="lb-form">Danh mục sản phẩm</label>
+        <select id="category" class="form-control" formControlName="category">
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+        <span *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched" class="error-message">
+          Bạn chưa chọn danh mục
+        </span>
+        <br />
+        <hr />
+        <button type="submit" class="btn btn-primary form-control" [disabled]="loading">
+          {{ productId ? 'Cập nhật' : 'Thêm' }}
+        </button>
+      </div>
+
+      <!-- Cột bên phải -->
+      <div class="col-md-8 col-sm-12 col-12">
+        <!-- Ảnh nền -->
+        <label class="lb-form">Ảnh nền</label>
+        <input id="imageBanner" type="file" class="form-control" (change)="onFileUpload($event)" />
+        <img id="imgpreproduct"  [src]="imagePreview"  style="width: 70px; margin-top: 5px; display: block;" />
+
+        <!-- Ảnh phụ -->
+        <label class="lb-form">Ảnh phụ</label>
+        <div class="row" id="preview">
+          <input id="choosefile" #fileInput multiple type="file" style="visibility: hidden;" (change)="onFileSelect($event)" />
+          <div class="col-md-3" id="chon-anhs" style="height: 100px;" (click)="triggerFileInput(fileInput)">
+            <div style="height: 120px;" id="choose-image" class="choose-image">
+              <p><i class="fas fa-camera" id="camera"></i></p>
+              <p id="numimage">Chọn ảnh phụ cho sản phẩm</p>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3" id="preview">
+          <!-- Hiển thị danh sách ảnh preview -->
+          <div *ngFor="let previewUrl of previewUrls; let i = index" class="col-md-3 col-sm-6 col-6" style="height: 120px; padding-top: 5px;">
+            <img 
+              [src]="previewUrl" 
+              class="image-upload" 
+              style="height: 85px; width: 90%; margin-top: 5px;" 
+            />
+            <button 
+              class="btn btn-warning" 
+              style="height: 30px; width: 90%; margin-top: 5px; text-align: center; font-size: 12px;" 
+              (click)="removeImage(i)">
+              Xóa
+            </button>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <!-- Hiển thị danh sách ảnh preview -->
+          <div *ngFor="let productImg of uploadedImages; let i = index" class="col-md-3 col-sm-6 col-6" style="height: 120px; padding-top: 5px;">
+            <img 
+              [src]="productImg.linkImage" 
+              class="image-upload" 
+              style="height: 85px; width: 90%; margin-top: 5px;" 
+            />
+            <button 
+              type="button"
+              class="btn btn-warning" 
+              style="height: 30px; width: 90%; margin-top: 5px; text-align: center; font-size: 12px;" 
+              (click)="deleteImage(productImg.id)">
+              Xóa
+            </button>
+          </div>
+        </div>
+        <!-- Mô tả sản phẩm -->
+        <label class="lb-form">Mô tả sản phẩm</label>
+        <textarea id="description" class="form-control" formControlName="description"></textarea>
+      </div>
+    </div>
+  </form>
+</div>

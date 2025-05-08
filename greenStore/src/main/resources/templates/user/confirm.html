@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <!-- Thêm SweetAlert vào trang của bạn -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+    <link href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/menu.js"></script>
+    <script src="js/account.js"></script>
+    <script>
+        window.onload = function(){
+            loadMenu();
+        }
+    </script>
+</head>
+<body>
+<div id="menu"></div>
+<div class="contentweb">
+    <div class="container">
+        <div class="dangnhapform">
+            <div class="divimglogin">
+                <img src="image/login.jpg" alt=""/>
+            </div>
+            <div class="divctlogin">
+                <div class="form-container">
+                    <p class="labeldangnhap">Xác Nhận Đăng Ký Tài Khoản</p>
+                    <form action="javascript:confirmAccount()" autocomplete="off">
+                        <label class="lbform">Nhập mã xác nhận của bạn</label>
+                        <div class="otp-container">
+                            <input type="text" class="otp-input" maxlength="1" autofocus />
+                            <input type="text" class="otp-input" maxlength="1" />
+                            <input type="text" class="otp-input" maxlength="1" />
+                            <input type="text" class="otp-input" maxlength="1" />
+                            <input type="text" class="otp-input" maxlength="1" />
+                            <input type="text" class="otp-input" maxlength="1" />
+                        </div>
+                        
+                    </form>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
+</body>
+<style>
+    :root {
+    --primary-color: #4CAF50;
+    --secondary-color: #FF5722;
+    --input-border-color: #ccc;
+    --input-focus-color: #66BB6A;
+    --button-hover-color: #43A047;
+    --button-secondary-hover-color: #E64A19;
+    --text-color: #333;
+    --label-color: #4CAF50;
+    --background-color: #f9f9f9;
+}
+
+.labeldangnhap {
+    font-size: 1.6em;
+    color: var(--label-color);
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.lbform {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: var(--text-color);
+    text-align: center;
+    font-weight: 500;
+    position: relative;
+}
+
+.lbform::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin: 8px auto 0;
+    border-radius: 2px;
+}
+
+.otp-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.otp-input {
+    width: 45px;
+    height: 45px;
+    border: 2px solid var(--input-border-color);
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.2em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.otp-input:focus {
+    outline: none;
+    border-color: var(--input-focus-color);
+    box-shadow: 0 0 5px rgba(102, 187, 106, 0.5);
+}
+
+</style>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', () => {
+    const otpFields = document.querySelectorAll('.otp-input');
+
+    otpFields.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+            // Chuyển sang trường tiếp theo nếu đã nhập đủ ký tự
+            if (e.target.value.length === 1 && index < otpFields.length - 1) {
+                otpFields[index + 1].focus();
+            }
+
+            // Kiểm tra nếu tất cả các ô đã được nhập
+            if (index === otpFields.length - 1) {
+                // Kiểm tra nếu tất cả các ô đều đã có giá trị
+                const allFilled = Array.from(otpFields).every(field => field.value.length === 1);
+                if (allFilled) {
+                    confirmAccount(); // Gọi hàm confirmAccount() nếu tất cả các ô đã được nhập
+                }
+            }
+        });
+
+        input.addEventListener('keydown', (e) => {
+            // Chuyển về trường trước nếu nhấn phím Backspace và trường hiện tại rỗng
+            if (e.key === 'Backspace' && e.target.value.length === 0 && index > 0) {
+                otpFields[index - 1].focus();
+            }
+        });
+    });
+});
+
+
+
+
+</script>
+</html>

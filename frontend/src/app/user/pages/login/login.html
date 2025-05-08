@@ -1,0 +1,21 @@
+
+<div class="container">
+    <div class="dangnhapform">
+        <div class="divimglogin">
+            <img src="/image/login.jpg" alt=""/>
+        </div>
+        <div class="divctlogin">
+            <p class="labeldangnhap">Đăng Nhập</p>
+            <form (ngSubmit)="login()" autocomplete="off">
+                <label class="lbform">Tên tài khoản</label>
+                <input required [(ngModel)]="username" name='username' id="username" class="inputlogin"/>
+                <label class="lbform">Mật khẩu</label>
+                <input required [(ngModel)]="password" name='password' type="password" id="password" class="inputlogin"/>
+                <button class="btndangnhap">ĐĂNG NHẬP</button>
+                <button onclick="window.location.href='regis'" type="button" class="btndangky">ĐĂNG KÝ</button>
+            </form><br><br>
+            <hr style="clear: both">
+            <a href="forgot" class="lbquenmk">Quên mật khẩu ?</a>
+        </div>
+    </div>
+</div>

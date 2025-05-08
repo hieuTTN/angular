@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+    <link href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/menu.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/product.js"></script>
+    <script src="js/comment.js"></script>
+    <script>
+        window.onload = function(){
+            loadMenu();
+            loadAproduct();
+            loadSanPhamLienQuan();
+            loadProductComment();
+        }
+    </script>
+</head>
+<body>
+<div id="menu"></div>
+<div class="contentweb">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="sectiondetail">
+                    <img src="" id="imgdetailpro" class="imgdetailsp">
+                    <div class="row" id="listimgdetail">
+                        <!-- <div class="col-sm-2">
+                            <img src="" class="imgdetailpro">
+                        </div> -->
+                    </div>
+                </div>
+                <div class="sectiondetail">
+                    <strong>Sản phẩm liên quan</strong>
+                    <div class="row" id="listsplienquan">
+
+                    </div>
+                </div>
+                <div class="sectiondetail">
+                    <strong>Thông tin sản phẩm</strong>
+                    <div id="descriptiondetail">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="sectiondetail">
+                    <h4 id="detailnamepro"></h4>
+                    <span><span id="pricedetail" class="pricedetail"></span> - <span id="quansale" class="dabandetail"></span></span>
+                    <span class="hansudungdetail">Hạn sử dụng <span id=hansudung""></span></span>
+                    <button id="btnaddcart" class="btnthemgiohangdetial">Thêm vào giỏ hàng</button>
+                </div>
+                <div class="sectiondetail">
+                    <strong>Bình luận sản phẩm</strong>
+                    <div class="listcautlct" id="listcautlct">
+                        <div class="singlectlct">
+                            <div class="row">
+                                <div class="col-11">
+                                    <div class="d-flex nguoidangctl">
+                                        <img class="avtuserdangctl" src="image/avatar.png">
+                                        <span class="usernamedangctl">Username</span>
+                                        <span class="ngaytraloi">16-07-2023</span>
+                                    </div>
+                                    <div class="contentctlct">Mua với giá dùng thử 2tr6 thấy sản phẩm năm nay chất lượng đã cải tiến hơn nhiều, giao hàng cũng nhanh hơn. đặt ở web nên yên tâm không gặp lừa đảo hàng nhái vì mình bị gặp mấy lần rồi. cảm ơn shop!</div>
+                                    <div class="listimgcontent">
+                                        <img src="image/product1.webp">
+                                        <img src="image/product1.webp">
+                                        <img src="image/product1.webp">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-12" id="mycomment">
+                        
+                        <label id="titlerep" class="lb-chon-danhmuc">Bình luận của bạn</label>
+                        <div class="liststar" id="liststar">
+                            <span onclick="loadStar(0)" class="fa fa-star checkedstar"></span>
+                            <span onclick="loadStar(1)" class="fa fa-star checkedstar"></span>
+                            <span onclick="loadStar(2)" class="fa fa-star checkedstar"></span>
+                            <span onclick="loadStar(3)" class="fa fa-star checkedstar"></span>
+                            <span onclick="loadStar(4)" class="fa fa-star checkedstar"></span>
+                        </div>
+                        <textarea id="noidungbl" class="form-control"></textarea>
+                        <div onclick="choosefilecmt.click()" class="divchooseimg">
+                            <img src="image/addimg.png">
+                            <span id="slfile">Đính kèm hình ảnh (chọn tối đa 3 hình)</span>
+                            <span id="errorquan">Chỉ được chọn tối đa 3 ảnh</span>
+                            <input onchange="setFile()" type="file" id="choosefilecmt" multiple>
+                        </div>
+                        <div id="loading">
+                            <div class="bar1 bar"></div>
+                        </div><br>
+                        <button onclick="saveComment()" class="btn btn-primary form-control">Binh luận</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer"></div>
+</body>
+</html>
