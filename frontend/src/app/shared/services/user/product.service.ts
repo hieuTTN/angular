@@ -30,5 +30,10 @@ export class ProductService {
 
   getProductDetail(id: any): Observable<any> {
     return this.apiService.get(`product/public/findById?id=${id}`);
-}
+  }
+
+  
+  searchFullProduct(page: number, size: number, searchDto:any, sort: any): Observable<any> {
+    return this.apiService.postMethodPayload(`product/public/search-full-san-pham?page=${page}&size=${size}&sort=${sort}`, searchDto);
+  }
 }

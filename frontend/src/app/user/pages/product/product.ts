@@ -3,32 +3,31 @@ import { ProductService } from '../../../shared/services/user/product.service';
 import { CategoryService } from '../../../shared/services/admin/category.service';
 import { BannerService } from '../../../shared/services/user/banner.service';
 import { CartService } from '../../../shared/services/user/cart.service';
-import { BlogService } from '../../../shared/services/user/blog.service';
-import { Product } from '../../../shared/models/product.model';
-import { Category } from '../../../shared/models/category.model';
 import { Banner } from '../../../shared/models/banner.model';
 import { ToastrService } from 'ngx-toastr';
 import { UserLayoutComponent } from '../../layout/user-layout';
 @Component({
-  selector: 'app-home',
+  selector: 'app-product',
   standalone:false,
-  templateUrl: './blog.html',
+  templateUrl: './product.html',
   styleUrl:'../../../style/user.css'
 })
 
 
-export class BlogComponent implements OnInit {
+export class ProductComponent implements OnInit {
   categories: any[] = [];
   banners: Banner[] = [];
   filteredBanners: Banner[] = []; // Banners không phải TOP
   isLoggedIn: boolean = false;
 
-  size: number = 3;
-  blogs: any[] = [];
-  page: number = 0;
-  lastPage: boolean = false;
+  size: number = 12;
+  products: any[] = [];
+  numPage: number = 1;
 
-  productKhuyenMai: any[] = [];
+  selectedCategoryId: any = -1;
+  searchParam: any = '';
+  mucGia: any = '0-1000000000';
+  sort: any = 'id,desc';
 
   constructor(
     private toastr: ToastrService,
@@ -36,24 +35,49 @@ export class BlogComponent implements OnInit {
     private cartService: CartService, 
     private userLayoutComponent: UserLayoutComponent, 
     private bannerService: BannerService, 
-    private blogService: BlogService, 
-    private categoryService: CategoryService) {
+    private categoryService: CategoryService
+  ) { }
 
-    }
-
-  ngOnInit(): void {
-    this.loadCategory();
+  async ngOnInit(): Promise<void> {
+    await this.loadUrl();
+    await this.loadCategory();
     this.loadBanner();
-    this.loadBlogs();
-    this.loadProductKhuyenMai();
+    this.laodProduct(0);
     this.isLoggedIn = !!window.localStorage.getItem("token");
   }
 
 
+  laodProduct(page:number){
+    var dto = {
+      search: this.searchParam,
+      category:this.selectedCategoryId == -1?null: this.selectedCategoryId,
+      small:this.mucGia.split("-")[0],
+      large:this.mucGia.split("-")[1],
+    }
+    console.log(dto);
+    
+    this.productService.searchFullProduct(page, this.size, dto, this.sort).subscribe(result => {
+      this.products = [];
+      this.products.push(...result.content);
+      this.numPage = result.totalPages;
+    });
+  }
+
+  loadUrl(){
+    var uls = new URL(document.URL)
+    var category = uls.searchParams.get("category");
+    var search = uls.searchParams.get("search");
+    if(category != null){
+      this.selectedCategoryId = category;
+    }
+    if(search != null){
+      this.searchParam = search;
+    }
+  }
+
   loadCategory(): void {
     this.categoryService.getCategories().subscribe(data => {
       this.categories = data;
-      
     });
   }
 
@@ -61,29 +85,6 @@ export class BlogComponent implements OnInit {
     this.bannerService.getBanner().subscribe(data => {
       this.banners = data;
       this.filteredBanners = this.banners.filter(banner => banner.bannerType !== 'TOP');
-    });
-  }
-
-  loadBlogs(): void {
-    if (this.lastPage) {
-      alert('Đã hết kết quả tìm kiếm');
-      return;
-    }
-
-    this.blogService.getBlogs(this.page, this.size).subscribe(result => {
-      if (result && result.content) {
-        this.blogs.push(...result.content);
-        this.lastPage = result.last;
-        this.page++;
-      }
-    });
-  }
-
-  loadProductKhuyenMai(): void {
-    this.productService.getDiscountedProducts(0, this.size).subscribe(result => {
-      if (result && result.content) {
-        this.productKhuyenMai.push(...result.content);
-      }
     });
   }
 

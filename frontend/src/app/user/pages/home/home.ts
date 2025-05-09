@@ -17,7 +17,7 @@ import { UserLayoutComponent } from '../../layout/user-layout';
 
 
 export class HomeComponent implements OnInit {
-  categories: Category[] = [];
+  categories: any[] = [];
   banners: Banner[] = [];
   filteredBanners: Banner[] = []; // Banners không phải TOP
   isLoggedIn: boolean = false;
@@ -58,7 +58,6 @@ export class HomeComponent implements OnInit {
   loadCategory(): void {
     this.categoryService.getCategories().subscribe(data => {
       this.categories = data;
-      
     });
   }
 

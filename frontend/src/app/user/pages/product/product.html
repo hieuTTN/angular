@@ -1,0 +1,63 @@
+<div class="container">
+  <div *ngIf="banners[getBannerIndex(1)]" class="bannerhot1">
+    <a [href]="banners[getBannerIndex(1)].linkWeb">
+      <img [src]="banners[getBannerIndex(1)].image" class="imgbannerhot" alt="Banner 1">
+    </a>
+  </div>
+  <div class="sectiondetail">
+      <div class="row">
+          <div class="col-lg-20p col-md-3 col-sm-6 col-6">
+              <input [(ngModel)]="searchParam" name="searchParam" class="form-control" placeholder="Tên sản phẩm"/>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-6 col-6">
+              <select [(ngModel)]="selectedCategoryId" name="selectedCategoryId" class="form-control">
+                  <option value="-1">Tất cả danh mục</option>
+                  <option [value]="c.id" [selected]="c.id == selectedCategoryId" *ngFor="let c of categories">{{c.name}}</option>
+              </select>
+          </div>
+          <div class="col-lg-20p col-md-3 col-sm-6 col-6">
+              <select [(ngModel)]="mucGia" name="mucGia" class="form-control">
+                  <option value="0-1000000000">Tất cả mức giá</option>
+                  <option value="0-19999">Dưới 20.000đ</option>
+                  <option value="20000-40000">Từ 20.000-40.000đ</option>
+                  <option value="40000-80000">Từ 40.000-80.000đ</option>
+                  <option value="80000-200000">Từ 80.000-200.000đ</option>
+                  <option value="200000-500000">Từ 200.000đ-500.000đ</option>
+                  <option value="500000-1000000000">Trên 500.000đ</option>
+              </select>
+          </div>
+          <div class="col-lg-20p col-md-3 col-sm-6 col-6">
+              <select [(ngModel)]="sort" name="sort" class="form-control">
+                  <option value="id,desc">Sắp xếp tự động</option>
+                  <option value="price,asc">Giá tăng dần</option>
+                  <option value="price,desc">Giá giảm dần</option>
+              </select>
+          </div>
+          <div class="col-lg-20p col-md-3 col-sm-6 col-6">
+              <button (click)="laodProduct(0)" class="btn btn-danger form-control">Lọc sản phẩm</button>
+          </div>
+     </div>
+  </div>
+  <div class="sectiondetail">
+      <div class="row" id="listsanpham">
+        <div class="col-lg-2 col-md-3 col-sm-6 col-6" *ngFor="let product of products">
+          <div class="singleproductlq">
+             <a [href]="'detail?id=' + product.id"><img [src]="product.imageBanner" class="imgproductlq"></a>
+             <a [href]="'detail?id=' + product.id" class="nameproductlq nameproducfilter">{{ product.name }}</a>
+             <span class="priceproductlq priceproductfilter">
+              {{ formatMoney(product.price) }}
+             <span class="giacufilter" *ngIf="product.oldPrice > 0">{{ formatMoney(product.oldPrice) }}</span>
+             </span>
+             <button (click)="addToCart(product.id)" class="btncartsplq">Giỏ hàng</button>
+          </div>
+        </div>
+      </div>
+      <nav aria-label="Page navigation example" style="margin-top: 30px;">
+          <ul class="pagination" id="pageable">
+            <li (click)="laodProduct(i)" class="page-item" *ngFor="let page of [].constructor(numPage); let i = index">
+              <a class="page-link">{{ i + 1 }}</a>
+            </li>
+          </ul>
+      </nav>
+  </div>
+</div>

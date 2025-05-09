@@ -13,6 +13,7 @@ import { AccountComponent } from './pages/taikhoan/account';
 import { BlogComponent } from './pages/blog/blog';
 import { BlogDetailComponent } from './pages/blog/blogdetail';
 import { DetailComponent } from './pages/productdetail/detail';
+import { ProductComponent } from './pages/product/product';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
       { path: 'blog', component: BlogComponent }, 
       { path: 'blogdetail', component: BlogDetailComponent }, 
       { path: 'detail', component: DetailComponent }, 
+      { path: 'product', component: ProductComponent }, 
       { path: '', component: HomeComponent }, 
       { path: '', redirectTo: '/404', pathMatch: 'full' }
     ]

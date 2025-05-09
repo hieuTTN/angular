@@ -3,8 +3,8 @@
 
       <div class="danhmucleft" id="danhmucleft">
         <span class="spdanhmucleft" *ngFor="let category of categories">
-          <a href="" class="danhmucnameleft">{{ category.name }}
-          <span class="slsanphamdanhmuc"></span>
+          <a href="product?category={{category.id}}" class="danhmucnameleft">{{ category.name }}
+          <span class="slsanphamdanhmuc">({{ category.products.length }})</span>
           </a>
           <img [src]="category.image" class="anhdmleft">
         </span>

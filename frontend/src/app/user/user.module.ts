@@ -18,11 +18,12 @@ import { AccountComponent } from './pages/taikhoan/account';
 import { BlogComponent } from './pages/blog/blog';
 import { BlogDetailComponent } from './pages/blog/blogdetail';
 import { DetailComponent } from './pages/productdetail/detail';
+import { ProductComponent } from './pages/product/product';
 
 @NgModule({
   declarations: [LoginComponent,RegisComponent,ConfirmComponent,forgotComponent,DatLaiMatKhauComponent,
     HomeComponent, CartComponent,ThanhCongComponent,AccountComponent, BlogComponent,BlogDetailComponent,
-    DetailComponent],
+    DetailComponent,ProductComponent],
   imports: [
     CommonModule,
     RouterModule, 
