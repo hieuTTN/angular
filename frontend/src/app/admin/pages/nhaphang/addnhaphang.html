@@ -1,0 +1,21 @@
+<div class="title-add-admin">
+    <p>Thêm/ cập nhật đơn nhập</p>
+</div>
+<form (ngSubmit)="saveImport()" class="form-add row" style="padding-bottom: 30px;">
+    <div class="col-sm-5">
+        <label class="lb-form">sản phẩm</label>
+        <select (change)="changegia()" [(ngModel)]="product" name="product" class="form-control" data-live-search="true">
+            <option [value]="n.id" *ngFor="let n of products">{{n.name}}</option>
+        </select>
+        <label class="lb-form">Số lượng</label>
+        <input [(ngModel)]="soluong" name="soluong" type="number" class="form-control">
+        <label class="lb-form">giá nhập</label>
+        <input [(ngModel)]="gianhap" name="gianhap" type="number" class="form-control"><br><br>
+        <button class="btn btn-success form-control action-btn">Thêm/ Cập nhật
+            đơn nhập</button>
+    </div>
+    <div class="col-sm-7">
+        <label class="lb-form">Mô tả</label>
+        <textarea [(ngModel)]="content" id="editor" name="content" placeholder="thông tin nhập hàng" rows="10" class="form-control"></textarea>
+    </div>
+</form>

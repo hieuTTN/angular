@@ -1,0 +1,29 @@
+<div class="title-add-admin">
+    <p>Thêm/ cập nhật đơn nhập</p>
+</div>
+<form (ngSubmit)="saveBlog()" class="form-add row" style="padding-bottom: 30px;">
+    <div class="col-sm-5">
+        <label class="lb-form">Tiêu đề blog</label>
+        <input [(ngModel)]="title" name="title" type="text" class="form-control">
+        <label class="lb-form">Ảnh bài viết</label>
+        <input (change)="changeFile($event)" id="fileimage" type="file" class="form-control">
+        <img [src]="imgpreview" id="imgpreview" style="width: 120px; margin-top: 15px;margin-bottom: 15px;display: block;">
+        <label class="lb-form">Mô tả</label>
+        <textarea [(ngModel)]="description" name="description" class="form-control" style="height: 100px;"></textarea>
+        <br>
+        <div id="loading" *ngIf="isLoading == true">
+            <div class="bar1 bar"></div>
+        </div><br>
+        <button class="form-control btn btn-primary">Thêm/cập nhật bài viết</button>
+    </div>
+    <div class="col-sm-7">
+        <label class="lb-form">Nội dung bài viết</label>
+        <!-- <textarea [(ngModel)]="content" id="editor" name="content" placeholder="thông tin nhập hàng" rows="10" class="form-control"></textarea> -->
+            <editor
+                [(ngModel)]="content"
+                id="editor"
+                name="content"
+                apiKey="xqhz0tu1vx2a47ob4qdhwpyz39c09mrs2mfilfeahlm42vwa" 
+                [init]=""></editor>
+    </div>
+</form>

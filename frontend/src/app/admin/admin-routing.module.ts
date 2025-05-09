@@ -7,6 +7,11 @@ import { AdminLayoutComponent } from './layout/admin-layout.component';
 import { DanhMucComponent } from './pages/danhmuc/danhmuc';
 import { TaiKhoanComponent } from './pages/taikhoan/taikhoan';
 import { InvoiceComponent } from './pages/invoice/invoice';
+import { BannerComponent } from './pages/banner/banner';
+import { NhapHangComponent } from './pages/nhaphang/nhaphang';
+import { AddNhapHangComponent } from './pages/nhaphang/addnhaphang';
+import { BlogComponent } from './pages/blog/blog';
+import { AddBlogComponent } from './pages/blog/addblog';
 
 const routes: Routes = [
   {
@@ -19,6 +24,11 @@ const routes: Routes = [
       { path: 'danhmuc', component: DanhMucComponent }, 
       { path: 'taikhoan', component: TaiKhoanComponent }, 
       { path: 'invoice', component: InvoiceComponent }, 
+      { path: 'banner', component: BannerComponent }, 
+      { path: 'importproduct', component: NhapHangComponent }, 
+      { path: 'addimportproduct', component: AddNhapHangComponent }, 
+      { path: 'blog', component: BlogComponent }, 
+      { path: 'addblog', component: AddBlogComponent }, 
       { path: '', redirectTo: 'index', pathMatch: 'full' }
     ]
   }

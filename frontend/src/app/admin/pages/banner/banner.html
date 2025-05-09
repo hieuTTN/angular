@@ -1,0 +1,71 @@
+<div class="col-sm-12 header-sp">
+    <div class="row">
+        <div class="col-md-3">
+            <button (click)="setData(null)" data-bs-toggle="modal" data-bs-target="#themdanhmuc" href="#"
+                class="btn btn-primary"><i class="fa fa-plus"></i> Thêm banner</button>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12">
+    <div class="wrapper">
+        <table id="example" class="table table-striped tablefix">
+            <thead class="thead-tablefix">
+                <tr>
+                    <th>id</th>
+                    <th>Ảnh</th>
+                    <th>Loại banner</th>
+                    <th>Tên trang</th>
+                    <th>Link web</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="listbanner">
+                <tr *ngFor="let p of banners">
+                    <td>{{p.id}}</td>
+                    <td><img [src]="p.image" style="width: 100px;"></td>
+                    <td>{{p.bannerType}}</td>
+                    <td>{{p.pageName}}</td>
+                    <td>{{p.linkWeb}}</td>
+                    <td class="sticky-col">
+                        <i (click)="delete(p.id)" class="fa fa-trash-alt iconaction"></i>
+                        <a (click)="setData(p)" data-bs-toggle="modal" data-bs-target="#themdanhmuc"><i class="fa fa-edit iconaction"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="modal fade" id="themdanhmuc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm cập nhật banner</h5> <button type="button"
+                    class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body row">
+                <form (ngSubmit)="saveBanner()" class="col-sm-6" style="margin: auto;">
+                    <input [(ngModel)]="idbanner" name="idbanner" type="hidden" class="form-control">
+                    <label class="lb-form">Tên trang</label>
+                    <input [(ngModel)]="tentrang" name="tentrang" type="text" placeholder="xyz" class="form-control">
+                    <label class="lb-form">Loại banner</label>
+                    <select [(ngModel)]="bannerType" name="bannerType" class="form-control">
+                        <option value="TOP">Banner top</option>
+                        <option value="NORMAL">Banner thường</option>
+                    </select>
+                    <label for="linkweb" class="lb-form">Link web</label>
+                    <input [(ngModel)]="linkweb" name="linkweb" list="linkweb-list" placeholder="Chọn hoặc nhập liên kết" class="form-control">
+                    <label class="lb-form">Ảnh banner</label>
+                    <input (change)="changeFile($event)" id="chonfileanh" type="file" class="form-control">
+                    <img [src]="imgpreview" name="imgpreview" style="width: 100px; margin-top: 10px;margin-bottom: 10px;">
+                    <br>
+                    <div id="loading" *ngIf="isLoading == true">
+                        <div class="bar1 bar"></div>
+                    </div><br>
+                    <button class="form-control btn btn-primary">Thêm/cập nhật banner</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

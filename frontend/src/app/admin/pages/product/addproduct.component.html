@@ -120,7 +120,13 @@
         </div>
         <!-- Mô tả sản phẩm -->
         <label class="lb-form">Mô tả sản phẩm</label>
-        <textarea id="description" class="form-control" formControlName="description"></textarea>
+        <editor
+                formControlName="description"
+                id="editor"
+                name="content"
+                apiKey="xqhz0tu1vx2a47ob4qdhwpyz39c09mrs2mfilfeahlm42vwa" 
+                [init]=""></editor>
+        <!-- <textarea id="description" class="form-control" formControlName="description"></textarea> -->
       </div>
     </div>
   </form>

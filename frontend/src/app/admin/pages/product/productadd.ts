@@ -53,7 +53,6 @@ export class ProductAddComponent implements OnInit {
         this.productForm = this.fb.group({
         name: ['', Validators.required],
         price: ['', [Validators.required, Validators.min(1)]],
-        oldPrice: ['', [Validators.required, Validators.min(1)]],
         quantity: ['', [Validators.required, Validators.min(1)]],
         unit: ['', Validators.required],
         expiry: ['', Validators.required],
@@ -130,11 +129,6 @@ export class ProductAddComponent implements OnInit {
     
         // 2. Upload file ảnh phụ
         const uploadedUrls = await this.uploadMultipleFileNotResp();
-        // if (!uploadedUrls || uploadedUrls.length === 0) {
-        //     throw new Error('Không thể upload ảnh phụ. Vui lòng thử lại.');
-        // }
-    
-        // 3. Chuẩn bị dữ liệu sản phẩm
         const formValue = this.productForm.value;
     
         const productData: ProductRequest = {
