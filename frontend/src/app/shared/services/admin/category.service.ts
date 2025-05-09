@@ -1,18 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ApiService } from '../user/api.service';
 import { Category } from '../../models/category.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
-  private baseUrl = 'http://localhost:8080/api/category';
 
-  constructor(private http: HttpClient) {}
+  constructor(private apiService: ApiService) {}
 
   getCategories(): Observable<any> {
-    let url = `${this.baseUrl}/public/findAll`;
-    return this.http.get(url);
+    return this.apiService.get(`category/public/findAll`);
+  }
+
+  postCategory(category: any): Observable<any> {
+    return this.apiService.postMethodPayload(`category/admin/create-update`, category);
+  }
+
+  delete(id: any): Observable<any> {
+    return this.apiService.deleteMethod(`category/admin/delete?id=${id}`);
   }
 }

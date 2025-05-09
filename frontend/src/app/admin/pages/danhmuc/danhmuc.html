@@ -1,0 +1,62 @@
+<div class="col-sm-12 header-sp">
+    <div class="row">
+        <div class="col-md-3">
+            <button (click)="setData(null)" data-bs-toggle="modal" data-bs-target="#themdanhmuc"
+                class="btn btn-success"><i class="fa fa-plus"></i> Thêm danh mục</button>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12">
+    <div class="wrapper">
+        <table id="example" class="table table-striped tablefix">
+            <thead class="thead-tablefix">
+                <tr>
+                    <th>id</th>
+                    <th>Ảnh</th>
+                    <th>Tên danh mục</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="listcategory">
+                <tr *ngFor="let p of categories">
+                    <td>{{p.id}}</td>
+                    <td><img [src]="p.image" class="imgtable"></td>
+                    <td>{{p.name}}</td>
+                    <td class="sticky-col">
+                        <i (click)="delete(p.id)" class="fa fa-trash-alt iconaction"></i>
+                        <a (click)="setData(p)" data-bs-toggle="modal" data-bs-target="#themdanhmuc"><i class="fa fa-edit iconaction"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="themdanhmuc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm/ cập nhật danh mục</h5> <button type="button"
+                    class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="saveCategory()" class="col-sm-5" style="margin: auto;">
+                    <input [(ngModel)]="idcate" name="idcate" type="hidden">
+                    <label>Tên danh mục</label>
+                    <input [(ngModel)]="catename" name="catename" type="text" class="form-control">
+                    <label>Ảnh danh mục</label>
+                    <input (change)="changeFile($event)" name="anhdm" type="file" class="form-control">
+                    <br>
+                    <img [src]="imgpreview" class="imgtable"  name="imgpreview">
+                    <br>
+                    <div id="loading" *ngIf="isLoading == true">
+                        <div class="bar1 bar"></div>
+                    </div>
+                    <br>
+                    <button class="btn btn-success form-control action-btn">Thêm/ Cập nhật
+                        danh mục</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

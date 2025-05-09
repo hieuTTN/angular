@@ -1,0 +1,80 @@
+<div class="col-sm-12 header-sp">
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-6">
+            <button data-bs-toggle="modal" data-bs-target="#addtk" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Thêm tài khoản
+            </button>
+        </div>
+        <div class="col-md-3 col-sm-6 col-6">
+            <select (change)="loadTaiKhoan()" [(ngModel)]="roleSearch" name="roleSearch" class="form-control">
+                <option value="">Tất cả quyền</option>
+                <option value="ROLE_USER">Tài khoản người dùng</option>
+                <option value="ROLE_ADMIN">Tài khoản admin</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12">
+    <div class="wrapper">
+        <table id="example" class="table table-striped tablefix">
+            <thead class="thead-tablefix">
+                <tr>
+                    <th>id</th>
+                    <th>Email</th>
+                    <th>Họ tên</th>
+                    <th>Số điện thoại</th>
+                    <th>Ngày tạo</th>
+                    <th>Quyền</th>
+                    <th>Khóa</th>
+                </tr>
+            </thead>
+            <tbody id="listuser">
+                <tr *ngFor="let p of taikhoans">
+                    <td>{{p.id}}</td>
+                    <td>{{p.email}}</td>
+                    <td>{{p.fullname}}</td>
+                    <td>{{p.phone}}</td>
+                    <td>{{p.createdDate}}</td>
+                    <td>{{p.authorities.name}}</td>
+                    <td>
+                        <button (click)="lockUnLock(p.id)" *ngIf="p.actived == 0" class="btn btn-danger">
+                            <i class="fa fa-unlock"></i> mở khóa</button>
+                        <button (click)="lockUnLock(p.id)" *ngIf="p.actived == 1" class="btn btn-primary">
+                            <i class="fa fa-lock"></i> khóa</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="addtk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm tài khoản quản trị</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div class="modal-body row">
+                <form (ngSubmit)="saveTaiKhoan()" class="col-sm-6" style="margin: auto;">
+                    <label class="lb-form">Họ tên</label>
+                    <input [(ngModel)]="fullname" name="fullname" class="form-control">
+                    <label class="lb-form">Số điện thoại</label>
+                    <input [(ngModel)]="phone" name="phone" class="form-control">
+                    <label class="lb-form">Email</label>
+                    <input [(ngModel)]="email" name="email" id="email" class="form-control">
+                    <label class="lb-form">Mật khẩu</label>
+                    <input [(ngModel)]="password" name="password" id="pass" type="password" class="form-control">
+                    <label class="lb-form">Nhắc lại mật khẩu</label>
+                    <input [(ngModel)]="repass" name="repass" id="repass" type="password" class="form-control">
+                    <label class="lb-form">Loại tài khoản</label>
+                    <select [(ngModel)]="roleadd" name="roleadd" class="form-control">
+                        <option value="ROLE_ADMIN">Tài khoản admin</option>
+                    </select>
+                    <br>
+                    <button class="form-control btn btn-primary">Thêm tài khoản</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
