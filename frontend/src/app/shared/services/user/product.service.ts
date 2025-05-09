@@ -24,7 +24,11 @@ export class ProductService {
     return this.apiService.get(`product/public/findById?id=${id}`);
   }
 
-  getRelatedProducts(id: number): Observable<any> {
+  getRelatedProducts(id: any): Observable<any> {
     return this.apiService.get(`product/public/san-pham-lien-quan?id=${id}`);
   }
+
+  getProductDetail(id: any): Observable<any> {
+    return this.apiService.get(`product/public/findById?id=${id}`);
+}
 }

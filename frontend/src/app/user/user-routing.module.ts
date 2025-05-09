@@ -7,6 +7,12 @@ import { ConfirmComponent } from './pages/confirm/confirm';
 import { forgotComponent } from './pages/forgot/forgot';
 import { DatLaiMatKhauComponent } from './pages/datlaimatkhau/datlaimatkhau';
 import { HomeComponent } from './pages/home/home';
+import { CartComponent } from './pages/cart/cart';
+import { ThanhCongComponent } from './pages/thanhcong/thanhcong';
+import { AccountComponent } from './pages/taikhoan/account';
+import { BlogComponent } from './pages/blog/blog';
+import { BlogDetailComponent } from './pages/blog/blogdetail';
+import { DetailComponent } from './pages/productdetail/detail';
 
 const routes: Routes = [
   {
@@ -18,6 +24,12 @@ const routes: Routes = [
       { path: 'confirm', component: ConfirmComponent }, 
       { path: 'forgot', component: forgotComponent }, 
       { path: 'datlaimatkhau', component: DatLaiMatKhauComponent }, 
+      { path: 'cart', component: CartComponent }, 
+      { path: 'thanhcong', component: ThanhCongComponent }, 
+      { path: 'account', component: AccountComponent }, 
+      { path: 'blog', component: BlogComponent }, 
+      { path: 'blogdetail', component: BlogDetailComponent }, 
+      { path: 'detail', component: DetailComponent }, 
       { path: '', component: HomeComponent }, 
       { path: '', redirectTo: '/404', pathMatch: 'full' }
     ]

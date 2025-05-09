@@ -114,7 +114,7 @@ async function cancelInvoice(id) {
     if (con == false) {
         return;
     }
-    var url = 'http://localhost:8080/api/user/cancel-invoice?id=' + id;
+    var url = 'http://localhost:8080/api/invoice/user/cancel-invoice?id=' + id;
     const res = await fetch(url, {
         method: 'GET',
         headers: new Headers({

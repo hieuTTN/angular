@@ -5,6 +5,7 @@ import com.web.dto.request.LoginDto;
 import com.web.dto.request.PasswordDto;
 import com.web.dto.request.TokenDto;
 import com.web.dto.request.UserRequest;
+import com.web.dto.response.Message;
 import com.web.dto.response.UserDto;
 import com.web.entity.Authority;
 import com.web.entity.User;
@@ -105,13 +106,13 @@ public class UserApi {
     @PostMapping("/user/change-password")
     public ResponseEntity<?> changePassword(@RequestBody PasswordDto passwordDto){
         userService.changePass(passwordDto.getOldPass(), passwordDto.getNewPass());
-        return new ResponseEntity<>("Success", HttpStatus.OK);
+        return new ResponseEntity<>(new Message("Success"), HttpStatus.OK);
     }
 
     @PostMapping("/forgot-password")
     public ResponseEntity<?> changePassword(@RequestParam String email){
         userService.forgotPassword(email);
-        return new ResponseEntity<>("Success", HttpStatus.OK);
+        return new ResponseEntity<>(new Message("Success"), HttpStatus.OK);
     }
 
     @GetMapping("/admin/get-user-by-role")

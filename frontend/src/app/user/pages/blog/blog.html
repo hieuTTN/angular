@@ -1,0 +1,81 @@
+<div class="containerss">
+  <div class="row">
+
+      <div class="danhmucleft" id="danhmucleft">
+        <span class="spdanhmucleft" *ngFor="let category of categories">
+          <a href="" class="danhmucnameleft">{{ category.name }}
+          <span class="slsanphamdanhmuc"></span>
+          </a>
+          <img [src]="category.image" class="anhdmleft">
+        </span>
+      </div>
+
+      <div class="mainright">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner carousel-inner-index">
+            <div 
+              *ngFor="let banner of banners; let i = index" 
+              class="carousel-item" 
+              [ngClass]="{'active': i === 0}">
+              <a [href]="banner.linkWeb">
+                <img [src]="banner.image" class="d-block w-100" alt="...">
+              </a>
+            </div>
+          </div>
+          <button class="carousel-control carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+          <button class="carousel-control carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-9">
+              <div id="listblogmain">
+                <div class="row singlebloglist"  *ngFor="let blog of blogs">
+                  <div class="col-sm-4">
+                      <a href="blogdetail?id={{blog.id}}"><img [src]="blog.imageBanner" class="imgbloglist"></a>
+                  </div>
+                  <div class="col-sm-8">
+                      <a href="blogdetail?id={{blog.id}}" class="blognamemain">{{blog.title}}</a>
+                      <span class="desblogmain">{{blog.description}}</span>
+                  </div>
+              </div>
+              </div>
+              <div class="xemtatca">
+                <button id="btnsanphambanchay" class="xemtatcabtn" (click)="loadBlogs()">Xem thêm <i class="fa fa-chevron-down"></i></button>
+              </div>
+          </div>
+          <div class="col-sm-3">
+              <strong>Sản phẩm khuyến mại</strong>
+              <div id="spkhuyenmaiindex">
+                <div *ngFor="let product of productKhuyenMai">
+                  <div class="singlesp">
+                    <div class="topspindex">
+                      <a [href]="'detail?id=' + product.id"><img [src]="product.imageBanner" class="imgproindex"></a>
+                      <a [href]="'detail?id=' + product.id" class="tenspindex">{{ product.name }}</a>
+                    </div>
+                    <div class="divgiaspindex">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <span class="curprice">{{ formatMoney(product.price) }}</span>
+                          <span class="oldpricesp" *ngIf="product.oldPrice > 0">{{ formatMoney(product.oldPrice) }}</span>
+                        </div>
+                        <div class="col-sm-6">
+                          <button (click)="addToCart(product.id)" class="btngiohangsp"><i class="fa fa-shopping-cart"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="phantramgiam">-{{tinhGiamGia(product.price, product.oldPrice)}} %</span>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
+        <div id="footer"></div>
+      </div>
+
+    </div>
+  </div>

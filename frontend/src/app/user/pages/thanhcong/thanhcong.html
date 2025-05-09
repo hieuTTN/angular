@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+        <div style="margin-top: 180px;">
+            <div *ngIf="isSuccess" id="thanhcong" style="text-align: center;margin-top: 15px; line-height: 25px;">
+                <h3 style="font-size: 25px; font-weight: bold;">Đặt hàng thành công</h3>
+                <p style="margin-top: 15px;">Cảm ơn bạn đã đăng mua sản phẩm chúng tôi.</p>
+                <p style="margin-top: 15px;">Hãy kiểm tra thông tin đơn hàng của bạn</p>
+                <a href="account" class="btn btn-danger" style="margin-top: 15px;">Xem đơn hàng đã đặt</a>
+            </div>
+
+            <div *ngIf="!isSuccess" id="thatbai" style="text-align: center;margin-top: 15px;">
+                <h3 style="font-size: 25px; font-weight: bold;">Thông báo</h3>
+                <p style="margin-top: 15px;" id="errormess">{{messError}}</p>
+                <p style="margin-top: 15px;">Quay về <a href="/" style="color: red;">trang chủ</a></p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -850,7 +850,7 @@ tr {
     font-weight: 500;
 }
 #thatbai{
-    text-align: center;margin-top: 15px; display: none;
+    text-align: center;margin-top: 15px; 
 }
 #thatbai p{
     margin-top: 15px;
@@ -1105,6 +1105,7 @@ tr {
 }
 .imgdetailpro {
     width: 100%;
+    cursor: pointer;
 }
 .imgactive {
     border: 2px solid #fcaf17;
@@ -1414,7 +1415,6 @@ tr {
     margin-top: 20px;
     height: 4px;
     width: 100%;
-    display: none;
 }
 
 .bar {
@@ -2218,4 +2218,18 @@ footer .fab:hover {
     outline: none;
     border-color: var(--input-focus-color);
     box-shadow: 0 0 5px rgba(102, 187, 106, 0.5);
+}
+.imgcomments{
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border: 1px solid silver;
+    padding: 2px;
+    margin-top: 5px;
+    border-radius: 3px;
+}
+.listcautlct{
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

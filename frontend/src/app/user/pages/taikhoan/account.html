@@ -1,0 +1,174 @@
+<div class="container">
+    <div class="row cartbds">
+      <div class="col-lg-3 col-md-3 col-sm-12 col-12 collistcart">
+        <div class="navleft">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-6 col-6">
+              <div class="avaaccount">
+                <img [src]="userInfor?.avatar || 'image/avatar.webp'" class="avataracc" id="avataracc">
+                <p class="fullnamacc">{{ userInfor?.fullName || 'Tài khoản' }}</p>
+                <button class="btnlogoutacc" (click)="logout()">Đăng xuất</button>
+              </div>
+            </div>
+  
+            <div class="col-lg-12 col-md-12 col-sm-6 col-6 sinv">
+              <div *ngFor="let tab of tabs" (click)="changeTab(tab.id)" class="tabdv" [class.activetabdv]="selectedTab === tab.id">
+                <a><img class="imgau" [src]="tab.icon"> {{ tab.label }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-lg-9 col-md-9 col-sm-12 col-12 collistcart">
+        <div class="navright">
+          <div class="tab-content contentab">
+            <div *ngIf="selectedTab === 'invoice'" class="tab-pane active" id="invoice">
+              <div class="headeraccount">
+                <p class="fontyel">Đơn hàng của tôi</p>
+                <span>(Nhấp vào mã đơn hàng để xem chi tiết)</span>
+                <div class="right_flex">
+                  <span class="textrf">{{ orders.length }} đơn hàng</span>
+                </div>
+              </div>
+              <table class="table table-cart table-order">
+                <thead class="thead-default">
+                  <tr>
+                    <th>Mã đơn hàng</th>
+                    <th class="floatr">Ngày mua</th>
+                    <th>Địa chỉ</th>
+                    <th class="floatr">Giá trị<br>đơn hàng</th>
+                    <th>Trạng thái thanh toán</th>
+                    <th class="floatr">Trạng thái vận chuyển</th>
+                    <th>Hủy</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let order of orders">
+                    <td (click)="loadChiTietInvoice(order)" data-bs-toggle="modal" data-bs-target="#modaldeail"><a class="yls pointer-event">#{{ order.id }}</a></td>
+                    <td class="floatr">{{ order.createdTime}}, {{order.createdDate}}</td>
+                    <td>{{ order.address }}</td>
+                    <td class="floatr"><span class="yls">{{ formatMoney(order.totalAmount) }}</span></td>
+                    <td><span class="span_pending">{{ order.payType }}</span></td>
+                    <td class="floatr"><span class="span_">{{ order.statusInvoice }}</span></td>
+                    <td><i *ngIf="order.payType == 'COD' && (order.statusInvoice == 'DANG_CHO_XAC_NHAN' || order.statusInvoice == 'DA_XAC_NHAN')" 
+                        class="fa fa-trash-alt huydon" (click)="cancelOrder(order.id)"></i></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+  
+            <div *ngIf="selectedTab === 'changepass'" class="tab-pane active" id="changepass">
+              <div class="headeraccount">
+                <span class="fontyel">Đổi mật khẩu</span><span class="smyl"> (Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác)</span>
+              </div>
+              <form (submit)="changePassword()" class="col-lg-6 col-md-6 col-sm-12 col-12 passacc">
+                <label class="lbacc">Mật khẩu hiện tại *</label>
+                <input [(ngModel)]="oldpassword" name="oldpass" type="password" class="form-control">
+                <label class="lbacc">Mật khẩu mới *</label>
+                <input [(ngModel)]="newpassword" name="newpass" type="password" class="form-control">
+                <label class="lbacc">Xác nhận mật khẩu mới *</label>
+                <input [(ngModel)]="renewpassword" name="renewpass" type="password" class="form-control"><br>
+                <button type="submit" class="btn btn-warning form-control">LƯU</button>
+              </form>
+            </div>
+  
+            <div *ngIf="selectedTab === 'changeinfor'" class="tab-pane active" id="changeinfor">
+              <div class="headeraccount">
+                <span class="fontyel">Cập nhật thông tin tài khoản</span>
+              </div>
+              <form (submit)="updateAccount()" class="col-lg-6 col-md-6 col-sm-12 col-12 passacc">
+                <label class="lbacc">Họ tên</label>
+                <input [(ngModel)]="fullname" name="fullName" class="form-control">
+                <label class="lbacc">Số điện thoại</label>
+                <input [(ngModel)]="phone" name="phone" class="form-control">
+                <label class="lbacc">Địa chỉ</label>
+                <input [(ngModel)]="address" name="address" class="form-control"><br>
+                <button type="submit" class="btn btn-warning form-control">LƯU</button>
+              </form>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="modal fade" id="modaldeail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-fullscreen-sm-down modeladdres">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chi tiết đơn hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row headerdetail">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                        <br><span>Ngày tạo: <span class="yls" id="ngaytaoinvoice">{{order?.createdTime}} {{order?.createdDate}}</span></span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                        <br><span>Trạng thái thanh toán: <span class="yls" id="trangthaitt">
+                            <span class='Paid' *ngIf="order?.payType === 'MOMO'">Đã thanh toán</span>
+                            <span class='UnPaid' *ngIf="order?.payType === 'COD'">Thanh toán khi nhận hàng (COD)</span>
+                        </span></span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                        <br><span>Trạng thái vận chuyển: <span class="yls" id="ttvanchuyen">{{order?.statusInvoice}}</span></span>
+                    </div>
+                </div>
+                <div class="row shipinfor">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <span class="ttshipinfor">Địa chỉ giao hàng</span>
+                        <div class="blockinfor">
+                            <p class="tennguoinhan" id="tennguoinhan">{{order?.receiverName}}</p>
+                            <span>Địa chỉ: <span id="addnhan">{{order?.address}}</span></span>
+                            <br><span class="phoneacc">Số điện thoại: <span
+                                    id="phonenhan">{{order?.phone}}</span></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+                        <span class="ttshipinfor">Thanh toán</span>
+                        <div class="blockinfor">
+                            <span id="loaithanhtoan">
+                                <span class='Paid' *ngIf="order?.payType === 'MOMO'">Đã thanh toán</span>
+                            <span class='UnPaid' *ngIf="order?.payType === 'COD'">Thanh toán khi nhận hàng (COD)</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+                        <span class="ttshipinfor">Ghi chú</span>
+                        <div class="blockinfor">
+                            <span id="ghichunh">{{order?.note}}</span>
+                        </div>
+                    </div>
+                </div><br><br>
+                <table class="table table-cart table-order" id="detailInvoice">
+                    <thead class="thead-default theaddetail">
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th></th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listDetailinvoice">
+                        <tr *ngFor="let detail of orderDetails">
+                            <td><img [src]="detail.product.imageBanner" class="imgdetailacc"></td>
+                            <td>
+                                <a href="">{{detail.product.name}}</a><br>
+                            </td>
+                            <td>{{formatMoney(detail.price)}}</td>
+                            <td class="sldetailacc">{{detail.quantity}}</td>
+                            <td class="pricedetailacc yls">{{formatMoney(detail.price * detail.quantity)}}</td>
+                        </tr>
+                    </tbody>
+                </table><br><br><br><br>
+            </div>
+        </div>
+    </div>
+</div>

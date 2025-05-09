@@ -3,6 +3,7 @@ import { ProductService } from '../../../shared/services/user/product.service';
 import { CategoryService } from '../../../shared/services/admin/category.service';
 import { BannerService } from '../../../shared/services/user/banner.service';
 import { CartService } from '../../../shared/services/user/cart.service';
+import { BlogService } from '../../../shared/services/user/blog.service';
 import { Product } from '../../../shared/models/product.model';
 import { Category } from '../../../shared/models/category.model';
 import { Banner } from '../../../shared/models/banner.model';
@@ -11,29 +12,23 @@ import { UserLayoutComponent } from '../../layout/user-layout';
 @Component({
   selector: 'app-home',
   standalone:false,
-  templateUrl: './home.html',
+  templateUrl: './blog.html',
   styleUrl:'../../../style/user.css'
 })
 
 
-export class HomeComponent implements OnInit {
+export class BlogComponent implements OnInit {
   categories: Category[] = [];
   banners: Banner[] = [];
   filteredBanners: Banner[] = []; // Banners không phải TOP
   isLoggedIn: boolean = false;
 
-  size: number = 5;
-
-  bestSellingProducts: any[] = [];
+  size: number = 3;
+  blogs: any[] = [];
   page: number = 0;
   lastPage: boolean = false;
+
   productKhuyenMai: any[] = [];
-
-  productMoi: any[] = [];
-  pageMoi: number = 0;
-  lastPageMoi: boolean = false;
-
-  selectedCategoryId: number = -1;
 
   constructor(
     private toastr: ToastrService,
@@ -41,6 +36,7 @@ export class HomeComponent implements OnInit {
     private cartService: CartService, 
     private userLayoutComponent: UserLayoutComponent, 
     private bannerService: BannerService, 
+    private blogService: BlogService, 
     private categoryService: CategoryService) {
 
     }
@@ -48,9 +44,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.loadCategory();
     this.loadBanner();
-    this.loadBestSellingProducts();
+    this.loadBlogs();
     this.loadProductKhuyenMai();
-    this.loadSanPhamMoi();
     this.isLoggedIn = !!window.localStorage.getItem("token");
   }
 
@@ -69,15 +64,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  loadBestSellingProducts(): void {
+  loadBlogs(): void {
     if (this.lastPage) {
       alert('Đã hết kết quả tìm kiếm');
       return;
     }
 
-    this.productService.getBestSellingProducts(this.page, this.size).subscribe(result => {
+    this.blogService.getBlogs(this.page, this.size).subscribe(result => {
       if (result && result.content) {
-        this.bestSellingProducts.push(...result.content);
+        this.blogs.push(...result.content);
         this.lastPage = result.last;
         this.page++;
       }
@@ -91,22 +86,6 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-
-  loadSanPhamMoi(): void {
-    if (this.lastPageMoi) {
-      alert('Đã hết kết quả tìm kiếm');
-      return;
-    }
-
-    this.productService.getNewProducts(this.pageMoi, this.size).subscribe(result => {
-      if (result && result.content) {
-        this.productMoi.push(...result.content);
-        this.lastPageMoi = result.last;
-        this.pageMoi++;
-      }
-    });
-  }
-
 
   formatMoney(money:number):string {
     const VND = new Intl.NumberFormat('vi-VN', {

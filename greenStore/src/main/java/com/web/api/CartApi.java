@@ -1,5 +1,6 @@
 package com.web.api;
 
+import com.web.dto.response.Message;
 import com.web.entity.Cart;
 import com.web.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +29,14 @@ public class CartApi {
 
     @PostMapping("/user/create")
     public ResponseEntity<?> add(@RequestParam("idproduct") Long idproduct){
-        cartService.addCart(idproduct);
-        return new ResponseEntity<>("Success", HttpStatus.CREATED);
+        Cart result = cartService.addCart(idproduct);
+        return new ResponseEntity<>(new Message("Success"), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/user/delete")
     public ResponseEntity<?> deleteById(@RequestParam("id") Long id){
         cartService.remove(id);
-        return new ResponseEntity<>("Success", HttpStatus.CREATED);
+        return new ResponseEntity<>(new Message("Success"), HttpStatus.CREATED);
     }
 
 
@@ -53,7 +54,7 @@ public class CartApi {
         else{
             cartService.upQuantity(id, quantity);
         }
-        return new ResponseEntity<>("success", HttpStatus.OK);
+        return new ResponseEntity<>(new Message("Success"), HttpStatus.OK);
     }
 
 

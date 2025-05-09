@@ -1,6 +1,7 @@
 package com.web.api;
 
 import com.web.dto.request.CommentRequest;
+import com.web.dto.response.Message;
 import com.web.dto.response.ProductCommentResponse;
 import com.web.service.ProductCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +37,13 @@ public class ProductCommentApi {
     @DeleteMapping("/user/delete")
     public ResponseEntity<?> delete(@RequestParam("id") Long id){
         productCommentService.delete(id);
-        return new ResponseEntity<>("success",HttpStatus.OK);
+        return new ResponseEntity<>(new Message("Success"),HttpStatus.OK);
     }
 
     @DeleteMapping("/admin/delete")
     public ResponseEntity<?> deleteByAdmin(@RequestParam("id") Long id){
         productCommentService.deleteByAdmin(id);
-        return new ResponseEntity<>("success",HttpStatus.OK);
+        return new ResponseEntity<>(new Message("Success"),HttpStatus.OK);
     }
 
     @GetMapping("/public/find-by-product")

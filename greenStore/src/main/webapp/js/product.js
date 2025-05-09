@@ -131,8 +131,8 @@ async function loadAproduct(){
     var result = await response.json();
     console.log(result)
     document.getElementById("detailnamepro").innerHTML = result.name
-    document.getElementById("pricedetail").innerHTML = formatmoney(result.price) +"/ "+result.unit
-    document.getElementById("hansudung").innerHTML = result.expiry
+    // document.getElementById("pricedetail").innerHTML = formatmoney(result.price) +"/ "+result.unit
+    // document.getElementById("hansudung").innerHTML = result.expiry
     document.getElementById("quansale").innerHTML = "Đã bán: "+result.quantitySold;
     document.getElementById("imgdetailpro").src = result.imageBanner
     document.getElementById("descriptiondetail").innerHTML = result.description

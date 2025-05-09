@@ -30,10 +30,26 @@
             </form>
           </div>
           <div class="d-flex">
-            
+            <span *ngIf="isLoggedIn" class="nav-item dropdown pointermenu gvs navlight">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="far fa-user-circle"></i> Tài khoản
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="account">Trang Cá Nhân</a></li>
+                  <li><a class="dropdown-item" href="#" (click)="logout()">Đăng xuất</a></li>
+                </ul>
+            </span>
+            <ng-container *ngIf="!isLoggedIn">
+                <a href="login" class="pointermenu gvs">
+                  <i class="fa fa-sign-in-alt"></i> Đăng nhập
+                </a>
+                <a href="regis" class="pointermenu gvs">
+                  <i class="fa fa-user-plus"></i> Đăng ký
+                </a>
+            </ng-container>
           </div>
           <div class="d-flex">
-          <a href="cart" class="pointermenu gvs"><i class="fa fa-shopping-bag"><span id='totalcartheader' class="cart-total">0</span></i></a>
+          <a href="cart" class="pointermenu gvs"><i class="fa fa-shopping-bag"><span id='totalcartheader' class="cart-total">{{numCart}}</span></i></a>
           </div>
         </div>
     </nav>

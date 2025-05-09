@@ -1,6 +1,7 @@
 package com.web.api;
 import com.web.dto.request.InvoiceRequest;
 import com.web.dto.response.InvoiceResponse;
+import com.web.dto.response.Message;
 import com.web.entity.Category;
 import com.web.entity.Invoice;
 import com.web.entity.InvoiceDetail;
@@ -31,7 +32,7 @@ public class InvoiceApi {
     @PostMapping("/user/create")
     public ResponseEntity<?> save(@RequestBody InvoiceRequest invoiceRequest) throws Exception {
         invoiceService.create(invoiceRequest);
-        return new ResponseEntity<>("success", HttpStatus.CREATED);
+        return new ResponseEntity<>(new Message("Success"), HttpStatus.CREATED);
     }
 
     @GetMapping("/user/find-by-user")
@@ -44,7 +45,7 @@ public class InvoiceApi {
     @PostMapping("/user/cancel-invoice")
     public ResponseEntity<?> cancelInvoice(@RequestParam("idInvoice") Long idInvoice){
         invoiceService.cancelInvoice(idInvoice);
-        return new ResponseEntity<>("success", HttpStatus.CREATED);
+        return new ResponseEntity<>(new Message("Success"), HttpStatus.CREATED);
     }
 
     @GetMapping("/admin/find-all")

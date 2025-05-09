@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -18,7 +18,32 @@ export class ApiService {
     return this.http.post<T>(`${this.baseUrl}/${endpoint}`, body);
   }
 
-  delete<T>(endpoint: string, p0: { headers: { Authorization: string; }; }): Observable<T> {
-    return this.http.delete<T>(`${this.baseUrl}/${endpoint}`);
+  private getAuthHeaders(): HttpHeaders {
+    const token = window.localStorage.getItem('token') || '';
+    return new HttpHeaders({ Authorization: `Bearer ${token}` });
+  }
+
+  getMethod<T>(endpoint: string): Observable<T> {
+    return this.http.get<T>(`${this.baseUrl}/${endpoint}`, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  postMethod<T>(endpoint: string): Observable<T> {
+    return this.http.post<T>(`${this.baseUrl}/${endpoint}`, null, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  postMethodPayload<T>(endpoint: string, payload: any): Observable<T> {
+    return this.http.post<T>(`${this.baseUrl}/${endpoint}`, payload, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  deleteMethod<T>(endpoint: string): Observable<T> {
+    return this.http.delete<T>(`${this.baseUrl}/${endpoint}`, {
+      headers: this.getAuthHeaders()
+    });
   }
 }

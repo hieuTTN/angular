@@ -1,0 +1,28 @@
+<div class="containerss">
+    <div class="row">
+  
+        <div class="danhmucleft" id="danhmucleft">
+          <span class="spdanhmucleft" *ngFor="let category of categories">
+            <a href="" class="danhmucnameleft">{{ category.name }}
+            <span class="slsanphamdanhmuc"></span>
+            </a>
+            <img [src]="category.image" class="anhdmleft">
+          </span>
+        </div>
+  
+        <div class="mainright">
+            <div class="sectiondetail">
+                <strong id="titlebg">{{blog?.title}}</strong>
+                <div id="desdetailblog">
+                    {{blog?.description}}
+                </div>
+                <img [src]="blog?.imageBanner" id="anhctbaiviet" class="anhctbaiviet">
+                <div id="noidungctbaiviet" [innerHTML]="blog?.content"></div>
+                <div id="footer"></div>
+            </div>
+  
+          <div id="footer"></div>
+        </div>
+  
+      </div>
+    </div>

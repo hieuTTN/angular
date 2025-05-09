@@ -26,12 +26,12 @@ public class CartService{
     @Autowired
     private ProductRepository productRepository;
 
-    public void addCart(Long productId) {
+    public Cart addCart(Long productId) {
         Cart cart = new Cart();
         User user = userUtils.getUserWithAuthority();
         Optional<Cart> c = cartRepository.findByColorAndUser(user.getId(), productId);
         if(c.isPresent()){
-            return;
+            return c.get();
         }
         Optional<Product> productColor = productRepository.findById(productId);
         if (productColor.isEmpty()){
@@ -41,6 +41,7 @@ public class CartService{
         cart.setQuantity(1);
         cart.setProduct(productColor.get());
         cartRepository.save(cart);
+        return cart;
     }
 
     public void remove(Long id) {

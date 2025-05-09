@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="row">
+      <div class="col-sm-8">
+          <div class="sectiondetail">
+              <img [src]="imagebanner" id="imgdetailpro" class="imgdetailsp">
+              <div class="row" id="listimgdetail">
+                  <div class="col-sm-2">
+                    <img (click)="changeImage(product?.imageBanner)" [src]="product?.imageBanner" class="imgdetailpro">
+                  </div>
+                  <div *ngFor="let image of product?.productImages" class="col-sm-2">
+                      <img (click)="changeImage(image.linkImage)" [src]="image.linkImage" class="imgdetailpro">
+                  </div>
+              </div>
+          </div>
+          <div class="sectiondetail">
+              <strong>Sản phẩm liên quan</strong>
+              <div class="row" id="listsplienquan">
+                <div class="col-lg-3 col-md-6 col-sm-12 col-12" *ngFor="let pro of products">
+                  <div class="singleproductlq">
+                     <a href="detail?id={{pro.id}}"><img [src]="pro.imageBanner" class="imgproductlq"></a>
+                     <a href="detail?id={{pro.id}}" class="nameproductlq">{{pro.name}}</a>
+                     <span class="priceproductlq">{{formatMoney(pro.price)}}</span>
+                     <button (click)="addToCart(pro.id)" class="btncartsplq">Giỏ hàng</button>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="sectiondetail">
+              <strong>Thông tin sản phẩm</strong>
+              <div id="descriptiondetail" [innerHTML]="product?.description">
+
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-4">
+          <div class="sectiondetail">
+              <h4 id="detailnamepro">{{product?.name}}</h4>
+              <span><span id="pricedetail" class="pricedetail">{{formatMoney(product?.price)}}</span> - <span id="quansale" class="dabandetail">Đã bán {{product?.quantitySold}}</span></span>
+              <span class="hansudungdetail">Đơn vị tính <span>{{product?.unit}}</span></span>
+              <span class="hansudungdetail">Loại sản phẩm: <strong>{{product?.category.name}}</strong></span>
+              <button (click)="addToCart(product?.id)" id="btnaddcart" class="btnthemgiohangdetial">Thêm vào giỏ hàng</button>
+          </div>
+          <div class="sectiondetail">
+              <strong>Bình luận sản phẩm</strong>
+              <div class="listcautlct" id="listcautlct">
+                  <div class="singlectlct" *ngFor="let cmt of comments">
+                      <div class="row">
+                          <div class="col-11">
+                              <div class="d-flex nguoidangctl">
+                                  <img class="avtuserdangctl" src="/image/avatar.webp">
+                                  <span class="usernamedangctl">{{cmt.user.fullname}}</span>
+                                  <span class="ngaytraloi">{{cmt.createdTime}},{{cmt.createdDate}}</span>
+                              </div>
+                              <div class="contentctlct">{{cmt.content}}</div>
+                              <div class="col-sm-12">
+                                  <div class="row">
+                                    <div class="col-sm-3" *ngFor="let imagecmt of cmt.productCommentImages">
+                                      <img [src]="imagecmt.linkImage" class="imgcomments">
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-sm-12 col-12" id="mycomment">
+                  
+                  <label id="titlerep" class="lb-chon-danhmuc">Bình luận của bạn</label>
+                  <div class="liststar" id="liststar">
+                      <span (click)="loadStar(0)" class="fa fa-star" [class.checkedstar]="star > 0"></span>
+                      <span (click)="loadStar(1)" class="fa fa-star" [class.checkedstar]="star > 1"></span>
+                      <span (click)="loadStar(2)" class="fa fa-star" [class.checkedstar]="star > 2"></span>
+                      <span (click)="loadStar(3)" class="fa fa-star" [class.checkedstar]="star > 3"></span>
+                      <span (click)="loadStar(4)" class="fa fa-star" [class.checkedstar]="star > 4"></span>
+                  </div>
+                  <textarea [(ngModel)]="noidungbl" name="noidungbl" class="form-control"></textarea>
+                  <div onclick="choosefilecmt.click()" class="divchooseimg">
+                      <img src="/image/addimg.png">
+                      <span id="slfile" *ngIf="soFile == 0">Đính kèm hình ảnh (chọn tối đa 3 hình)</span>
+                      <span id="slfile" *ngIf="soFile > 0">Đã chọn {{soFile}} file</span>
+                      <span id="errorquan">Chỉ được chọn tối đa 3 ảnh</span>
+                      <input (change)="setFile($event)" type="file" id="choosefilecmt" multiple>
+                  </div>
+                  <div id="loading" *ngIf="isLoading == true">
+                      <div class="bar1 bar"></div>
+                  </div><br>
+                  <button (click)="postComment()" [disabled]="isLoading" class="btn btn-primary form-control">Binh luận</button>
+              </div>
+              
+          </div>
+      </div>
+  </div>
+</div>
