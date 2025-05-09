@@ -29,6 +29,14 @@ export class ApiService {
     });
   }
 
+  getMethodText<T>(endpoint: string): Observable<T> {
+    return this.http.get<T>(`${this.baseUrl}/${endpoint}`, {
+      headers: this.getAuthHeaders(),
+      responseType: 'text' as 'json' 
+    });
+  }
+
+
   postMethod<T>(endpoint: string): Observable<T> {
     return this.http.post<T>(`${this.baseUrl}/${endpoint}`, null, {
       headers: this.getAuthHeaders()

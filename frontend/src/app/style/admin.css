@@ -12909,3 +12909,80 @@ label {
         box-shadow: none; /* Loại bỏ bóng khi disabled */
     }
     
+
+
+    .main-component {
+        padding: 20px;
+        background: #ffffff; /* White background for the main container */
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Styling for the statistics container */
+    .thongke {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    /* Styling for each statistic box */
+    .thongke-item {
+        background: #ffffff; /* White background for each item */
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        flex: 1 1 200px; /* Ensure minimum width but flexible layout */
+        max-width: calc(33.333% - 20px); /* Adjust for three items per row */
+        box-sizing: border-box;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    /* Adding colorful backgrounds to each statistic box */
+    .thongke-item:nth-child(1) {
+        background: #c6efc6; /* Bright Green */
+    }
+    
+    .thongke-item:nth-child(2) {
+        background: #cfe2ff; /* Bright Blue */
+    }
+    
+    .thongke-item:nth-child(3) {
+        background: #ffffcc; /* Bright Yellow */
+    }
+    
+    .thongke-item:nth-child(4) {
+        background: #ffcccc; /* Bright Red */
+    }
+    
+    .thongke-item:nth-child(5) {
+        background: #e6e6e6; /* Bright Grey */
+    }
+    
+    /* Hover effect for statistic boxes */
+    .thongke-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Styling for the texts */
+    .texts {
+        font-size: 16px;
+        font-weight: 700;
+        color: #333; /* Darker text color for better readability */
+        margin-bottom: 12px;
+    }
+    
+    /* Styling for the quantity */
+    .soluong {
+        font-size: 24px;
+        font-weight: 700;
+        color: #000; /* Black text color for better contrast */
+        margin-top: 5px;
+    }
+    
+    .soluong b {
+        display: block;
+        font-size: 28px;
+        color: #000; /* Black text color for better contrast */
+    }

@@ -19,11 +19,12 @@ import { NhapHangComponent } from './pages/nhaphang/nhaphang';
 import { AddNhapHangComponent } from './pages/nhaphang/addnhaphang';
 import { BlogComponent } from './pages/blog/blog';
 import { AddBlogComponent } from './pages/blog/addblog';
+import { IndexComponent } from './pages/index/index.component';
 
 
 @NgModule({
   declarations: [ProductComponent, ProductAddComponent,DanhMucComponent,TaiKhoanComponent,
-    InvoiceComponent,BannerComponent,NhapHangComponent,AddNhapHangComponent,BlogComponent,AddBlogComponent],
+    InvoiceComponent,BannerComponent,NhapHangComponent,AddNhapHangComponent,BlogComponent,AddBlogComponent,IndexComponent],
   imports: [
     EditorModule,
     CommonModule,

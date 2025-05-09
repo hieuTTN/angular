@@ -62,15 +62,15 @@ public class StatiticsApi {
     }
 
     @GetMapping("/admin/revenue-year")
-    public List<Double> doanhThu(@RequestParam("year") Integer year){
-        List<Double> list = new ArrayList<>();
+    public List<Long> doanhThu(@RequestParam("year") Integer year){
+        List<Long> list = new ArrayList<>();
         int index = Arrays.asList(StatusInvoice.values()).indexOf(StatusInvoice.DA_NHAN);
         for(int i=1; i< 13; i++){
             Double sum = invoiceRepository.calDt(i, year, index);
             if(sum == null){
                 sum = 0D;
             }
-            list.add(sum);
+            list.add(sum.longValue());
         }
         return list;
     }

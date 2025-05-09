@@ -22,6 +22,7 @@
     "@ng-select/ng-select": "^14.7.0",
     "@tinymce/tinymce-angular": "^8.0.1",
     "bootstrap": "^5.3.6",
+    "chart.js": "^4.4.9",
     "jquery": "^3.7.1",
     "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
